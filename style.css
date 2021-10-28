@@ -1,12 +1,12 @@
 * {box-sizing: border-box}
 body {
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; 
-  margin:100px;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  margin:50px;
 }
-.mySlides{
-  display: none;
+.mySlides {
+  display: none
 }
-img{
+img {
   vertical-align: middle;
 }
 
@@ -175,14 +175,31 @@ img{
   margin-right: -15px;
   margin-left: -15px; 
 }
+
+@media (min-width: 768px){
+  .left_content{
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .right_content{
+    -ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    max-width: 75%;
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+}
 .left_content{
-  -ms-flex: 0 0 25%;
-  flex: 0 0 25%;
-  max-width: 25%;
-  position: relative;
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+}
+.right_content{
+  width: 100%;
 }
 .left_content img{
   margin-bottom: 0.5rem;
@@ -206,20 +223,11 @@ img{
   line-height: 1.5;
   border-radius: 1.078em;
   text-align: center;
-  vertical-align: middle;
   font-weight: 400;
   text-decoration: none;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-.right_content{
-  -ms-flex: 0 0 75%;
-  flex: 0 0 75%;
-  max-width: 75%;
-  position: relative;
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-}
+
 .badge{
   display: inline-block;
   padding: 0.6em 1.2em;
@@ -230,6 +238,7 @@ img{
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: 0.25rem;
+  margin-bottom: 0.6em;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .badge-primary{
@@ -269,17 +278,18 @@ img{
 }
 .list-group-item strong{
   margin-right: 5px;
+  font-weight: bolder;
 }
 .list-group-item a{
   text-decoration: none;
   color: cornflowerblue;
+  font-size: 0.93rem;
 }
 .repo_title{
   margin-bottom: 1rem;
   font-size: 1.86rem;
   font-weight: 700;
   line-height: 1.2;
-
 }
 #error-notifications{
   display: none;
