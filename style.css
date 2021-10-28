@@ -1,5 +1,13 @@
-* {
-  box-sizing: border-box;
+* {box-sizing: border-box}
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; 
+  margin:100px;
+}
+.mySlides{
+  display: none;
+}
+img{
+  vertical-align: middle;
 }
 
 /* Slideshow container */
@@ -9,20 +17,14 @@
   margin: auto;
 }
 
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
 /* Next & previous buttons */
-.prev,
-.next {
+.prev, .next {
   cursor: pointer;
   position: absolute;
   top: 50%;
   width: auto;
-  margin-top: -22px;
   padding: 16px;
+  margin-top: -22px;
   color: white;
   font-weight: bold;
   font-size: 18px;
@@ -38,9 +40,8 @@
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
 }
 
 /* Caption text */
@@ -75,8 +76,7 @@
   transition: background-color 0.6s ease;
 }
 
-.active,
-.dot:hover {
+.active, .dot:hover {
   background-color: #717171;
 }
 
@@ -89,19 +89,225 @@
 }
 
 @-webkit-keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
+  from {opacity: .4} 
+  to {opacity: 1}
 }
 
 @keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+/* GITHUB REPO FINDER STYLE */
+.search-container{
+  max-width: 1000px;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.25rem;
+  margin: auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+.search-container h1{
+  font-size: 2.6575rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+.search-container p{
+  color: #868e96;
+  font-size: 1.32875rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.form-control{
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 1rem + 2px);
+  padding: 0.5rem 1.1rem;
+  font-size: 1.063rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+/* REPO SEARCH RESULT STYLE */
+.user-profile-outer{
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+#user-result{
+  display: none;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.25rem;
+  position: relative;
+  margin-bottom: 1rem;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+} 
+.row1{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px; 
+}
+.left_content{
+  -ms-flex: 0 0 25%;
+  flex: 0 0 25%;
+  max-width: 25%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.left_content img{
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border-style: none;
+}
+.left_content a{
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  display: block;
+  width: 100%;
+  color: #fff;
+  background-color: #4582ec;
+  border-color: #4582ec;
+  border: 1px solid transparent;
+  padding: 0.5rem 1.1rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: 1.078em;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.right_content{
+  -ms-flex: 0 0 75%;
+  flex: 0 0 75%;
+  max-width: 75%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.badge{
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-size: 75%;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.badge-primary{
+  color: #fff;
+  background-color: #4582ec;
+}
+.badge-secondary {
+  color: #fff;
+  background-color: #adb5bd;
+}
+.badge-success {
+  color: #fff;
+  background-color: #02b875;
+}
+.badge-info {
+  color: #fff;
+  background-color: #17a2b8;
+}
+.list-group{
+  font-size: 0.93rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: 0.25rem;
+  
+}
+.list-group-item{
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+}
+.list-group-item strong{
+  margin-right: 5px;
+}
+.list-group-item a{
+  text-decoration: none;
+  color: cornflowerblue;
+}
+.repo_title{
+  margin-bottom: 1rem;
+  font-size: 1.86rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+}
+#error-notifications{
+  display: none;
+  align-items: center;
+}
+#error-notifications img{
+  width: 50%;
+}
+#repos-container{
+  display: none;
+}
+.repo-nth-child{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  padding: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.repo-title{
+  text-decoration: none;
+  color: #4582ec;
+}
+#repos-container{
+  display: none;
 }
