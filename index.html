@@ -393,7 +393,7 @@
         <h1>Search Github Users</h1>
         <p class="lead">Enter a username to search for github users and their repositories</p>
         <form method="GET" action="" id="userInputData">
-          <input onchange="cleanRepos()" type="text" id="searchUser" class="form-control" placeholder="GitHub Username..">
+          <input type="text" id="searchUser" class="form-control" placeholder="GitHub Username..">
         </form>
     </div>
     <br>
@@ -406,7 +406,7 @@
           <div class="row1">
             <div class="left_content">
               <img src="https://avatars.githubusercontent.com/u/89490337?v=4" alt="user avatar github" id="userAvatar">
-              <a href="http://" target="_blank">View profile</a>
+              <a id="url_profile" href="" target="_blank">View profile</a>
             </div>
             <div class="right_content">
               <span class="badge badge-primary">Public Repositories: <span id="public_repos"></span></span>
@@ -439,9 +439,10 @@
     
     
     <script>
+      // SLIDESHOW FUNCTION
       var slideIndex = 1;
       showSlides(slideIndex);
-      
+
       function plusSlides(n) {
         showSlides(slideIndex += n);
       }
@@ -465,6 +466,7 @@
         slides[slideIndex-1].style.display = "block";  
         dots[slideIndex-1].className += " active";
       }
+      // FETCH USER DATA FROM GITHUB
       var formData = document.getElementById('userInputData');
       formData.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -487,7 +489,9 @@
         })
       
       });
+      // DISPLAY USER DATA 
       function onCreateUser(jsonData){
+        
         if(jsonData.message === 'Not Found'){
           console.log(jsonData.message)
           document.getElementById('error-notifications').style.display='flex';
@@ -509,8 +513,10 @@
           document.getElementById('public_gists').innerText = jsonData.public_gists;
           document.getElementById('following').innerText = jsonData.following;
           document.getElementById('followers').innerText = jsonData.followers;
+          document.getElementById('url_profile').href = jsonData.html_url;
         }
       }
+      // FETCH USER REPOS 
       function onRetrieveRepos(username){
         var url = 'https://api.github.com/users/';
         var responsePromise = fetch(url+ username + '/repos');
@@ -526,11 +532,17 @@
           alert(error.message);
         })
       }
+      // RENDER AN ARRAY OF REPOS
       function renderRepos(jsonData){
-        jsonData.forEach(ele => {
-          createDiv(ele);
-        });
+        if(jsonData.length===0){
+          createDiv([])
+        }else{
+          jsonData.forEach(ele => {
+            createDiv(ele);
+          });
+        }
       }
+      // DISPLAY REPO IN HTML
       function createDiv(repo){
         document.getElementById('repos-container').style.display = 'block';
         const div = document.createElement("div");
@@ -538,11 +550,15 @@
         div.setAttribute("id", "repo-nth-child-info");
         var repoOuter = document.getElementById('repoOuter');
         repoOuter.appendChild(div);
-        const titleRepo = document.createElement("a");
-        titleRepo.innerText = repo.name;
-        titleRepo.href = repo.html_url;
-        titleRepo.setAttribute('class', 'repo-title')
-        return div.appendChild(titleRepo);
+        if(repo.length===0){
+          document.getElementById('repoOuter').innerHTML = "The current user doesn't have any public repositories yet.";
+        }else{
+          const titleRepo = document.createElement("a");
+          titleRepo.innerText = repo.name;
+          titleRepo.href = repo.html_url;
+          titleRepo.setAttribute('class', 'repo-title')
+          return div.appendChild(titleRepo);
+        }
       }
     </script>
     
