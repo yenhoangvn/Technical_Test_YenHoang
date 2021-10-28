@@ -56,7 +56,7 @@ function onCreateUser(jsonData){
         document.getElementById('user-result').style.display = "none";
         document.getElementById('repoOuter').innerHTML = "Not found";
     }else{
-        document.getElementById('repoOuter').innerHTML = "";s
+        document.getElementById('repoOuter').innerHTML = "";
         onRetrieveRepos(jsonData.login);
         document.getElementById('error-notifications').style.display = 'none';
         document.getElementById('user-result').style.display = "flex";
