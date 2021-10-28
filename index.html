@@ -164,8 +164,9 @@
           position: relative;
           margin: auto;
         }
-        .profile-container{
-          display: flex;
+        
+        #user-result{
+          display: none;
           flex-direction: column;
           min-width: 0;
           word-wrap: break-word;
@@ -178,11 +179,9 @@
           flex: 1 1 auto;
           min-height: 1px;
           padding: 1.25rem;
-        }
+        } 
         .row1{
-          display: -ms-flexbox;
           display: flex;
-          -ms-flex-wrap: wrap;
           flex-wrap: wrap;
           margin-right: -15px;
           margin-left: -15px; 
@@ -198,6 +197,7 @@
         }
         .left_content img{
           margin-bottom: 0.5rem;
+          margin-top: 1rem;
           max-width: 100%;
           height: auto;
           vertical-align: middle;
@@ -292,12 +292,40 @@
           line-height: 1.2;
 
         }
-
-
+        #error-notifications{
+          display: none;
+          align-items: center;
+        }
+        #error-notifications img{
+          width: 50%;
+        }
+        #repos-container{
+          display: none;
+        }
+        .repo-nth-child{
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 auto;
+          word-wrap: break-word;
+          background-color: #fff;
+          background-clip: border-box;
+          border: 1px solid rgba(0,0,0,.125);
+          border-radius: .25rem;
+          padding: 1.25rem;
+          margin-bottom: 0.5rem;
+        }
+        .repo-title{
+          text-decoration: none;
+          color: #4582ec;
+        }
+        #repos-container{
+          display: none;
+        }
         </style>
 </head>
 
-<body>
+<body onload="renderRepos();">
 
     <!-- START SLIDESHOW -->
     <div class="slideshow-container">
@@ -311,7 +339,7 @@
                 <source media="(min-width:465px)" srcset="/images/light_wide_0.5x.png">
                 <img src="images/img_lights_wide.jpeg" alt="aurora" style="width:100%">
             </picture>       
-            <div class="text">Caption Text</div>
+            <div class="text">Aurora</div>
         </div>
   
         <div class="mySlides fade">
@@ -322,7 +350,7 @@
                 <source media="(min-width:465px)" srcset="/images/mountain_wide_0.5x.png">
                 <img src="/images/img_mountains_wide.jpeg" alt="mountain" style="width:100%">
             </picture> 
-            <div class="text">Caption Two</div>
+            <div class="text">Mountain Landscape</div>
         </div>
   
         <div class="mySlides fade">
@@ -333,7 +361,7 @@
                 <source media="(min-width:465px)" srcset="/images/snow_wide_0.5x.png">
                 <img src="/images/img_snow_wide.jpeg" alt="snow winter" style="width:100%">
             </picture> 
-            <div class="text">Caption Three</div>
+            <div class="text">Snow</div>
         </div>
   
         <!-- slide controllers -->
@@ -356,64 +384,51 @@
         <h1>Search Github Users</h1>
         <p class="lead">Enter a username to search for github users and their repositories</p>
         <form method="GET" action="" id="userInputData">
-          <input type="text" id="searchUser" class="form-control" placeholder="GitHub Username..">
+          <input onchange="cleanRepos()" type="text" id="searchUser" class="form-control" placeholder="GitHub Username..">
         </form>
-        
-        
     </div>
     <br>
     <!-- Profiles result wil be inserted through JavaScript in the following div element -->
     <div class="user-profile-outer">
-      <div class="profile-container">
+      <div id="profileContainer" class="profile-container">
 
         <!-- USER GENERAL INFOS IF YES -->
-        <div class="row1">
-          <div class="left_content">
-            <img src="https://avatars.githubusercontent.com/u/89490337?v=4" alt="user avatar github" id="userAvatar">
-            <a href="http://" target="_blank">View profile</a>
+        <div id="user-result">
+          <div class="row1">
+            <div class="left_content">
+              <img src="https://avatars.githubusercontent.com/u/89490337?v=4" alt="user avatar github" id="userAvatar">
+              <a href="http://" target="_blank">View profile</a>
+            </div>
+            <div class="right_content">
+              <span class="badge badge-primary">Public Repositories: <span id="public_repos"></span></span>
+              <span class="badge badge-secondary">Public Gists: <span id="public_gists"></span></span>
+              <span class="badge badge-success">Followers: <span id="followers"></span></span>
+              <span class="badge badge-info">Following: <span id="following"></span></span>
+              <br>
+              <br>
+              <ul class="list-group">
+                <li class="list-group-item"><strong>Company: </strong> <p id="company"></p></li>
+                <li class="list-group-item"><strong>Website/Blog: </strong> <a id="website_blog" href="" target="_blank"></a></li>
+                <li class="list-group-item"><strong>Location: </strong> <p id="location"></p></li>
+                <li class="list-group-item"><strong>Member Since: </strong> <p id="member_duration"></p></li>
+              </ul>
+            </div>
           </div>
-          <div class="right_content">
-            <span class="badge badge-primary">Public Repositories: 2</span>
-            <span class="badge badge-secondary">Public Gists: 0</span>
-            <span class="badge badge-success">Followers: 0</span>
-            <span class="badge badge-info">Following: 0</span>
-            <br>
-            <br>
-            <ul class="list-group">
-              <li class="list-group-item"><strong>Company: </strong> <p id="company"></p></li>
-              <li class="list-group-item"><strong>Website/Blog: </strong> <a id="website_blog" href="" target="_blank"></a></li>
-              <li class="list-group-item"><strong>Location: </strong> <p id="location"></p></li>
-              <li class="list-group-item"><strong>Member Since: </strong> <p id="member_duration"></p></li>
-            </ul>
-          </div>
+
         </div>
-
-        <!-- REPOS OF FOUND USER IF YES -->
+        <div id="error-notifications">
+          <img src="/images/error.png" alt="404 code error">
+          <p>We could not find the user that you are looking for!</p>
+        </div>  
+      </div>
+      <!-- REPOS OF FOUND USER IF YES -->
+      <div id="repos-container">
         <h3 class="repo_title">Latest Repositories</h3>
-        <div class="repos">
-          <div class="repo_nth_child">
-            <div class="repo_name">
-              <a href="http://" target="_blank"></a>
-            </div>
-            <div class="repo_infos">
-              <span class="badge badge-primary">Stars: <p></p></span>
-              <span class="badge badge-secondary">Watchers: <p></p></span>
-              <span class="badge badge-success">Forks: <p></p></span>
-              <span class="badge badge-info">Language: <p></p></span>
-            </div>
-
-          </div>
-
-      </div>
-
-        
-        
-      </div>
+        <div id="repoOuter" class="repos"></div>
+      </div>  
     </div>
     
-
-
-
+    
     <script>
         var slideIndex = 1;
         showSlides(slideIndex);
@@ -455,20 +470,72 @@
           })
           .then(function(jsonData) {
             console.log(jsonData);
+            onCreateUser(jsonData);
+            
+          })
+          .catch(function(error){
+            alert(error.message);
+          })
+        
+        });
+        function onCreateUser(jsonData){
+          if(jsonData.message === 'Not Found'){
+            console.log(jsonData.message)
+            document.getElementById('error-notifications').style.display='flex';
+            document.getElementById('user-result').style.display = "none";
+            document.getElementById('repoOuter').innerHTML = "not found";
+          }else{
+            document.getElementById('repoOuter').innerHTML = "";
+            console.log('check====>',jsonData);
+            onRetrieveRepos(jsonData.login);
+            document.getElementById('error-notifications').style.display = 'none';
+            document.getElementById('user-result').style.display = "flex";
             document.getElementById('userAvatar').src = jsonData.avatar_url;
             document.getElementById('company').innerText = jsonData.company;
             document.getElementById('website_blog').innerText = jsonData.blog;
             document.getElementById('website_blog').href = jsonData.blog;
             document.getElementById('location').innerText = jsonData.location;
             document.getElementById('member_duration').innerText = jsonData.created_at.substring(0, 10);
+            document.getElementById('public_repos').innerText = jsonData.public_repos;
+            document.getElementById('public_gists').innerText = jsonData.public_gists;
+            document.getElementById('following').innerText = jsonData.following;
+            document.getElementById('followers').innerText = jsonData.followers;
+          }
+        }
+        function onRetrieveRepos(username){
+          var url = 'https://api.github.com/users/';
+          var responsePromise = fetch(url+ username + '/repos');
+          responsePromise
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(jsonData) {
+            console.log(jsonData);
+            renderRepos(jsonData);
+            
           })
           .catch(function(error){
-            console.log(error);
+            alert(error.message);
           })
-        
-        });
-
-
+        }
+        function renderRepos(jsonData){
+          jsonData.forEach(ele => {
+            createDiv(ele);
+          });
+        }
+        function createDiv(repo){
+          document.getElementById('repos-container').style.display = 'block';
+          const div = document.createElement("div");
+          div.setAttribute("class", "repo-nth-child");
+          div.setAttribute("id", "repo-nth-child-info");
+          var repoOuter = document.getElementById('repoOuter');
+          repoOuter.appendChild(div);
+          const titleRepo = document.createElement("a");
+          titleRepo.innerText = repo.name;
+          titleRepo.href = repo.html_url;
+          titleRepo.setAttribute('class', 'repo-title')
+          return div.appendChild(titleRepo);
+        }
         </script>
     
 </body>
